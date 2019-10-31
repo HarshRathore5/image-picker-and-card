@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import axios from 'axios';
-import { LoadImage } from './loadImage';
+import {LoadImage} from './loadImage';
 
 export default class Card extends React.Component {
   constructor(props) {
@@ -19,8 +19,14 @@ export default class Card extends React.Component {
       feed: [],
       isLoading: false,
       page: 1,
+      download: false,
     };
   }
+  onLoadImage = () => {
+    this.setState({
+      download: true,
+    });
+  };
   header = () => {
     return (
       <View>
@@ -79,8 +85,6 @@ export default class Card extends React.Component {
         {this.state.isLoading && <ActivityIndicator size="large" />}
         {this.state.feed.length > 0 && (
           <FlatList
-          
-            
             refreshing={false}
             onRefresh={() => {
               this.refresh();
@@ -91,7 +95,10 @@ export default class Card extends React.Component {
             renderItem={rowdata => (
               <View style={Styles.flatViewStyle}>
                 <LoadImage
-                item={rowdata.item}/>
+                  item={rowdata.item}
+                  download={this.state.download}
+                  onLoadImage={this.onLoadImage}
+                />
                 {/* <Image
                 onLoad={}
                   style={Styles.imgStyle}
