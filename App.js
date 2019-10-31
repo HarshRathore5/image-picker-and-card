@@ -7,9 +7,9 @@ export default class App extends React.Component{
   render(){
     return(
       // <React.Fragment>
-        // <Card/>
+        <Card/>
       // </React.Fragment>
-      <CropImage/>
+      // <CropImage/>
     )
   }
 }
